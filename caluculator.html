@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Modern Calculator</title>
+<style>
+body {
+  font-family: 'Poppins', sans-serif; /* Modern font */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(to right, #e1eec3, #f05053); /* Gradient background */
+  margin: 0; /* Remove default margin */
+}
+
+.calculator {
+  background: #333; /* Dark background */
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3); /* Deeper shadow */
+}
+
+.calculator input[type="text"] {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 20px;
+  font-size: 20px;
+  border: none;
+  background: #444; /* Slightly lighter background for display */
+  color: #eee; /* Light text color */
+  border-radius: 8px;
+  text-align: right;
+  box-sizing: border-box; /* Include padding in width */
+}
+
+.calculator button {
+  width: 60px;
+  height: 60px;
+  margin: 8px;
+  font-size: 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  background: #555; /* Darker button background */
+  color: #eee;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s, background-color 0.3s; /* Smooth transitions */
+}
+
+.calculator button:hover {
+  background: #666; /* Lighter on hover */
+  transform: translateY(-2px); /* Slight lift on hover */
+}
+
+.calculator button.operator {
+  background: #f0ad4e; /* Orange for operators */
+  color: #fff;
+}
+
+.calculator button.operator:hover {
+  background: #ec971f;
+}
+
+.calculator button.equal {
+  background: #5cb85c; /* Green for equals */
+  color: #fff;
+}
+
+.calculator button.equal:hover {
+  background: #4cae4c;
+}
+
+.calculator button.clear {
+    background: #d9534f; /* Red for clear */
+    color: #fff;
+}
+
+.calculator button.clear:hover {
+    background: #c9302c;
+}
+
+</style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" id="display" readonly>
+  <button onclick="appendToDisplay('7')">7</button>
+  <button onclick="appendToDisplay('8')">8</button>
+  <button onclick="appendToDisplay('9')">9</button>
+  <button class="operator" onclick="setOperator('+')">+</button><br>
+  <button onclick="appendToDisplay('4')">4</button>
+  <button onclick="appendToDisplay('5')">5</button>
+  <button onclick="appendToDisplay('6')">6</button>
+  <button class="operator" onclick="setOperator('-')">-</button><br>
+  <button onclick="appendToDisplay('1')">1</button>
+  <button onclick="appendToDisplay('2')">2</button>
+  <button onclick="appendToDisplay('3')">3</button>
+  <button class="operator" onclick="setOperator('*')">*</button><br>
+  <button onclick="appendToDisplay('0')">0</button>
+  <button onclick="appendToDisplay('.')">.</button>
+  <button class="equal" onclick="calculate()">=</button>
+  <button class="operator" onclick="setOperator('/')">/</button><br>
+  <button class="clear" onclick="clearDisplay()">C</button>
+</div>
+
+<script>
+// JavaScript code (same as the corrected version from my previous response)
+let display = document.getElementById('display');
+let operator = null;
+let operand1 = null;
+
+function appendToDisplay(value) {
+  display.value += value;
+}
+
+function clearDisplay() {
+  display.value = '';
+  operator = null;
+  operand1 = null;
+}
+
+function setOperator(op) {
+    if (display.value === "") return; // Don't set operator if display is empty
+
+    operator = op;
+    operand1 = parseFloat(display.value);
+    display.value = '';
+}
+
+function calculate() {
+  if (operator && operand1 !== null && display.value !== "") { // Check for empty display before calculating
+      const operand2 = parseFloat(display.value);
+      let result;
+
+      switch (operator) {
+          case '+':
+              result = operand1 + operand2;
+              break;
+          case '-':
+              result = operand1 - operand2;
+              break;
+          case '*':
+              result = operand1 * operand2;
+              break;
+          case '/':
+              result = operand1 / operand2;
+              break;
+      }
+
+      display.value = result;
+      operator = null;
+      operand1 = null;
+  }
+}
+</script>
+
+</body>
+</html>
+0 comments on commit 945f73c
+Please sign in to comment.
+Footer
+© 2025 GitHub, Inc.
